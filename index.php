@@ -284,7 +284,10 @@ class pluginDraft extends Plugin {
 	 * @return string HTML content
 	 */
 	protected function throwError($text) {
-		return '<div class="' . self::plugin_title . 'Error">' . $text . '</div>';
+		return '<div class="' . self::plugin_title . 'Error">'
+				. '<div>' . $this->cms_lang->getLanguageValue('error') . '</div>'
+				. '<span>' . $text. '</span>'
+				. '</div>';
 	}
 
 }
