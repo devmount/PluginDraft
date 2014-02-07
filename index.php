@@ -30,7 +30,7 @@ class pluginDraft extends Plugin {
 	);
 
 	// plugin paths
-	const path_abs = URL_BASE . PLUGIN_DIR_NAME . '/' . self::plugin_title;
+	const path_abs = $this->PLUGIN_SELF_URL;
 	const path_rel = PLUGIN_DIR_REL . self::plugin_title;
 
 	// set configuration elements, their default values and their configuration parameters
@@ -75,7 +75,7 @@ class pluginDraft extends Plugin {
 
 		// include jquery and pluginDraft javascript
 		$syntax->insert_jquery_in_head('jquery');
-		$syntax->insert_in_head('<script type="text/javascript" src="' . self::path_abs . '/js/pluginDraft.js"></script>');
+		$syntax->insert_in_head('<script type="text/javascript" src="' . self::path_abs . 'js/pluginDraft.js"></script>');
 
 		// initialize return content and default class
 		$content = '<!-- BEGIN ' . self::plugin_title . ' plugin content --> ';
@@ -133,7 +133,19 @@ class pluginDraft extends Plugin {
 		';
 
 		return $config;
-	}  
+	}
+
+	/**
+	 * sets default backend configuration elements, if no plugin.conf.php is created yet
+	 * @return Array configuration
+	 */
+	function getDefaultSettings() {
+		$config = array('active' => 'true');
+		foreach ($this->confdefault as $elem => $default) {
+			$config[$elem] = $default[0];
+		}
+		return $config;
+	}
 
 	/**
 	 * sets backend plugin information
