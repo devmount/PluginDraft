@@ -29,10 +29,6 @@ class pluginDraft extends Plugin {
 		'tag1' => '{pluginDraft|type|<param1>|<param2>}',
 	);
 
-	// plugin paths
-	const path_abs = $this->PLUGIN_SELF_URL;
-	const path_rel = PLUGIN_DIR_REL . self::plugin_title;
-
 	// set configuration elements, their default values and their configuration parameters
 	// 		text => default, type, maxlength, size, regex
 	// 		textarea => default, type, cols, rows, regex
@@ -59,7 +55,7 @@ class pluginDraft extends Plugin {
 		global $CMS_CONF;
 		global $syntax;
 
-		$this->cms_lang = new Language(self::path_rel . '/lang/cms_language_' . $CMS_CONF->get('cmslanguage') . '.txt');
+		$this->cms_lang = new Language($this->PLUGIN_SELF_DIR . 'lang/cms_language_' . $CMS_CONF->get('cmslanguage') . '.txt');
 
 		// get language labels
 		$label = $this->cms_lang->getLanguageValue('label');
@@ -75,7 +71,7 @@ class pluginDraft extends Plugin {
 
 		// include jquery and pluginDraft javascript
 		$syntax->insert_jquery_in_head('jquery');
-		$syntax->insert_in_head('<script type="text/javascript" src="' . self::path_abs . 'js/pluginDraft.js"></script>');
+		$syntax->insert_in_head('<script type="text/javascript" src="' . $this->PLUGIN_SELF_URL . 'js/pluginDraft.js"></script>');
 
 		// initialize return content and default class
 		$content = '<!-- BEGIN ' . self::plugin_title . ' plugin content --> ';
@@ -154,7 +150,7 @@ class pluginDraft extends Plugin {
 	function getInfo() {
 
 		global $ADMIN_CONF;
-		$this->admin_lang = new Language(self::path_rel . '/lang/admin_language_' . $ADMIN_CONF->get('language') . '.txt');
+		$this->admin_lang = new Language($this->PLUGIN_SELF_DIR . 'lang/admin_language_' . $ADMIN_CONF->get('language') . '.txt');
 
 		// build plugin tags
 		$tags = array();
