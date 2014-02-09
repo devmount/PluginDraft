@@ -22,11 +22,12 @@ class pluginDraft extends Plugin
     private $cms_lang;
 
     // plugin information
-    const plugin_author = 'HPdesigner';
-    const plugin_docu = 'http://www.devmount.de/Develop/Mozilo%20Plugins/pluginDraft.html';
-    const plugin_title = 'pluginDraft';
-    const plugin_version = 'v0.x.jjjj-mm-dd';
-    const mozilo_version = '2.0';
+    const PLUGIN_AUTHOR  = 'HPdesigner';
+    const PLUGIN_DOCU    = 
+        'http://www.devmount.de/Develop/Mozilo%20Plugins/pluginDraft.html';
+    const PLUGIN_TITLE   = 'pluginDraft';
+    const PLUGIN_VERSION = 'v0.x.jjjj-mm-dd';
+    const MOZILO_VERSION = '2.0';
     private $plugin_tags = array(
         'tag1' => '{pluginDraft|type|<param1>|<param2>}',
     );
@@ -43,18 +44,12 @@ class pluginDraft extends Plugin
      *      select   => default, type, descriptions, multiselect
      */
     private $confdefault = array(
-        'text'      => array(
-            'string',
-            'text',
-            '100',
-            '5',
-            "/^[0-9]{1,3}$/"
-        ),
-        'textarea'  => array('string','textarea','10','10',"/^[a-zA-Z0-9]{1,10}$/"),
-        'password'  => array('string','password','100','5',"/^[a-zA-Z0-9]{8,20}$/",true),
-        'check'     => array(true,'check'),
-        'radio'     => array('red','radio',array('red','green','blue')),
-        'select'    => array('bike','select',array('car','bike','plane'),false),
+        'text'     => array('string','text','100','5',"/^[0-9]{1,3}$/"),
+        'textarea' => array('string','textarea','10','10',"/^[a-zA-Z0-9]{1,10}$/"),
+        'password' => array('string','password','100','5',"/^[a-zA-Z0-9]{8,20}$/",true),
+        'check'    => array(true,'check'),
+        'radio'    => array('red','radio',array('red','green','blue')),
+        'select'   => array('bike','select',array('car','bike','plane'),false),
     );
 
     /**
@@ -100,11 +95,11 @@ class pluginDraft extends Plugin
         );
 
         // initialize return content and default class
-        $content = '<!-- BEGIN ' . self::plugin_title . ' plugin content --> ';
+        $content = '<!-- BEGIN ' . self::PLUGIN_TITLE . ' plugin content --> ';
         
         // do something awesome here! ...
 
-        $content .= '<!-- END ' . self::plugin_title . ' plugin content --> ';
+        $content .= '<!-- END ' . self::PLUGIN_TITLE . ' plugin content --> ';
 
         return $content;
     }
@@ -221,9 +216,9 @@ class pluginDraft extends Plugin
         // $config['--template~~'] = '
         //     <div style="' . $css_admin_header . '">
         //     <span style="' . $css_admin_header_span . '">'
-        //         . $this->admin_lang->getLanguageValue('admin_header',self::plugin_title)
+        //         . $this->admin_lang->getLanguageValue('admin_header',self::PLUGIN_TITLE)
         //     . '</span>
-        //     <a href="' . self::plugin_docu . '" target="_blank">
+        //     <a href="' . self::PLUGIN_DOCU . '" target="_blank">
         //     <img style="float:right;" src="http://media.devmount.de/logo_pluginconf.png" />
         //     </a>
         //     </div>
@@ -290,11 +285,11 @@ class pluginDraft extends Plugin
         }
 
         $info = array(
-            '<b>' . self::plugin_title . '</b> ' . self::plugin_version,
-            self::mozilo_version,
+            '<b>' . self::PLUGIN_TITLE . '</b> ' . self::PLUGIN_VERSION,
+            self::MOZILO_VERSION,
             $this->admin_lang->getLanguageValue('description'), 
-            self::plugin_author,
-            self::plugin_docu,
+            self::PLUGIN_AUTHOR,
+            self::PLUGIN_DOCU,
             $tags
         );
 
@@ -371,11 +366,11 @@ class pluginDraft extends Plugin
      */
     protected function confPassword(
         $description,
-        $maxlength='',
-        $size='',
-        $regex='',
-        $regex_error='',
-        $saveasmd5=true
+        $maxlength = '',
+        $size = '',
+        $regex = '',
+        $regex_error = '',
+        $saveasmd5 = true
     ) {
         // required properties
         $conftext = array(
@@ -427,7 +422,7 @@ class pluginDraft extends Plugin
      * @param  boolean $multiple Enable multiple item selection
      * @return Array   Configuration
      */
-    protected function confSelect($description, $descriptions, $multiple=false)
+    protected function confSelect($description, $descriptions, $multiple = false)
     {
         // required properties
         return array(
@@ -445,7 +440,7 @@ class pluginDraft extends Plugin
      */
     protected function throwError($text)
     {
-        return '<div class="' . self::plugin_title . 'Error">'
+        return '<div class="' . self::PLUGIN_TITLE . 'Error">'
                 . '<div>' . $this->cms_lang->getLanguageValue('error') . '</div>'
                 . '<span>' . $text. '</span>'
                 . '</div>';
