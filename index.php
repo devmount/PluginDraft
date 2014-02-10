@@ -34,7 +34,9 @@ class pluginDraft extends Plugin
 
     
     /**
-     * set configuration elements, their default values and their configuration parameters
+     * set configuration elements, their default values and their configuration
+     * parameters
+     * 
      * @var array
      *      text     => default, type, maxlength, size, regex
      *      textarea => default, type, cols, rows, regex
@@ -115,72 +117,78 @@ class pluginDraft extends Plugin
         // read config values
         foreach ($this->confdefault as $key => $value) {
             switch ($value[1]) {
-            case 'text':
-                $config[$key] = $this->confText(
-                    $this->admin_lang->getLanguageValue('config_' . $key),
-                    $value[2],
-                    $value[3],
-                    $value[4],
-                    $this->admin_lang->getLanguageValue('config_' . $key . '_error')
-                );
-                break;
-
-            case 'textarea':
-                $config[$key] = $this->confTextarea(
-                    $this->admin_lang->getLanguageValue('config_' . $key),
-                    $value[2],
-                    $value[3],
-                    $value[4],
-                    $this->admin_lang->getLanguageValue('config_' . $key . '_error')
-                );
-                break;
-
-            case 'password':
-                $config[$key] = $this->confPassword(
-                    $this->admin_lang->getLanguageValue('config_' . $key),
-                    $value[2],
-                    $value[3],
-                    $value[4],
-                    $this->admin_lang->getLanguageValue('config_' . $key . '_error'),
-                    $value[5]
-                );
-                break;
-
-            case 'check':
-                $config[$key] = $this->confCheck(
-                    $this->admin_lang->getLanguageValue('config_' . $key)
-                );
-                break;
-
-            case 'radio':
-                $descriptions = array();
-                foreach ($value[2] as $description) {
-                    $descriptions[$description] = $this->admin_lang->getLanguageValue(
-                        'config_' . $key . '_' . $description
+                case 'text':
+                    $config[$key] = $this->confText(
+                        $this->admin_lang->getLanguageValue('config_' . $key),
+                        $value[2],
+                        $value[3],
+                        $value[4],
+                        $this->admin_lang->getLanguageValue(
+                            'config_' . $key . '_error'
+                        )
                     );
-                }
-                $config[$key] = $this->confRadio(
-                    $this->admin_lang->getLanguageValue('config_' . $key),
-                    $descriptions
-                );
-                break;
+                    break;
 
-            case 'select':
-                $descriptions = array();
-                foreach ($value[2] as $description) {
-                    $descriptions[$description] = $this->admin_lang->getLanguageValue(
-                        'config_' . $key . '_' . $description
+                case 'textarea':
+                    $config[$key] = $this->confTextarea(
+                        $this->admin_lang->getLanguageValue('config_' . $key),
+                        $value[2],
+                        $value[3],
+                        $value[4],
+                        $this->admin_lang->getLanguageValue(
+                            'config_' . $key . '_error'
+                        )
                     );
-                }
-                $config[$key] = $this->confSelect(
-                    $this->admin_lang->getLanguageValue('config_' . $key),
-                    $descriptions,
-                    $value[3]
-                );
-                break;
+                    break;
 
-            default:
-                break;
+                case 'password':
+                    $config[$key] = $this->confPassword(
+                        $this->admin_lang->getLanguageValue('config_' . $key),
+                        $value[2],
+                        $value[3],
+                        $value[4],
+                        $this->admin_lang->getLanguageValue(
+                            'config_' . $key . '_error'
+                        ),
+                        $value[5]
+                    );
+                    break;
+
+                case 'check':
+                    $config[$key] = $this->confCheck(
+                        $this->admin_lang->getLanguageValue('config_' . $key)
+                    );
+                    break;
+
+                case 'radio':
+                    $descriptions = array();
+                    foreach ($value[2] as $label) {
+                        $descriptions[$label] = $this->admin_lang->getLanguageValue(
+                            'config_' . $key . '_' . $label
+                        );
+                    }
+                    $config[$key] = $this->confRadio(
+                        $this->admin_lang->getLanguageValue('config_' . $key),
+                        $descriptions
+                    );
+                    break;
+
+                case 'select':
+                    $descriptions = array();
+                    foreach ($value[2] as $label) {
+                        $descriptions[$label] = $this->admin_lang->getLanguageValue(
+                            'config_' . $key . '_' . $label
+                        );
+                    }
+                    $config[$key] = $this->confSelect(
+                        $this->admin_lang->getLanguageValue('config_' . $key),
+                        $descriptions,
+                        $value[3]
+                    );
+                    break;
+
+                default:
+                    break;
             }
         }
 
@@ -216,10 +224,14 @@ class pluginDraft extends Plugin
         // $config['--template~~'] = '
         //     <div style="' . $css_admin_header . '">
         //     <span style="' . $css_admin_header_span . '">'
-        //         . $this->admin_lang->getLanguageValue('admin_header',self::PLUGIN_TITLE)
+        //         . $this->admin_lang->getLanguageValue(
+        //              'admin_header',
+        //              self::PLUGIN_TITLE
+        //         )
         //     . '</span>
         //     <a href="' . self::PLUGIN_DOCU . '" target="_blank">
-        //     <img style="float:right;" src="http://media.devmount.de/logo_pluginconf.png" />
+        //     <img style="float:right;" 
+        //     src="http://media.devmount.de/logo_pluginconf.png" />
         //     </a>
         //     </div>
         // </li>
@@ -251,7 +263,9 @@ class pluginDraft extends Plugin
     }
 
     /**
-     * sets default backend configuration elements, if no plugin.conf.php is created yet
+     * sets default backend configuration elements, if no plugin.conf.php is 
+     * created yet
+     * 
      * @return Array configuration
      */
     function getDefaultSettings()
