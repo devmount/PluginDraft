@@ -1,4 +1,4 @@
-<?php if (!defined('IS_CMS')) die();
+<?php
 
 /**
  * Plugin:   pluginDraft
@@ -14,6 +14,11 @@
  * www.devmount.de
  *
  */
+
+// only allow moziloCMS environment
+if (!defined('IS_CMS')) {
+    die();
+}
 
 class pluginDraft extends Plugin
 {
@@ -96,11 +101,12 @@ class pluginDraft extends Plugin
             . 'js/pluginDraft.js"></script>'
         );
 
-        // initialize return content and default class
+        // initialize return content, begin plugin content
         $content = '<!-- BEGIN ' . self::PLUGIN_TITLE . ' plugin content --> ';
         
         // do something awesome here! ...
 
+        // end plugin content
         $content .= '<!-- END ' . self::PLUGIN_TITLE . ' plugin content --> ';
 
         return $content;
@@ -235,13 +241,7 @@ class pluginDraft extends Plugin
         //     </a>
         //     </div>
         // </li>
-        // <li class="
-        //     mo-in-ul-li
-        //     mo-inline
-        //     ui-widget-content
-        //     ui-corner-all
-        //     ui-helper-clearfix
-        // " style="' . $css_admin_li . '">
+        // <li class="mo-in-ul-li ui-widget-content" style="' . $css_admin_li . '">
         //     <div style="' . $css_admin_subheader . '">'
         //     . $this->admin_lang->getLanguageValue('admin_spacing') . '</div>
         //     <div style="margin-bottom:5px;">
