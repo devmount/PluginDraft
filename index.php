@@ -1,14 +1,21 @@
 <?php
 
 /**
- * Plugin:   pluginDraft
- * 
- * @author:  HPdesigner (kontakt[at]devmount[dot]de)
- * @license: GPL v3
- * @version: v0.x.jjjj-mm-dd
- * @link:    http://www.devmount.de/Develop/Mozilo%20Plugins/pluginDraft.html
- * @see:     Verse
- *           - The Bible
+ * moziloCMS Plugin: PluginDraft
+ *
+ * Does something awesome!
+ *
+ * PHP version 5
+ *
+ * @category PHP
+ * @package  PHP_MoziloPlugins
+ * @author   HPdesigner <kontakt@devmount.de>
+ * @license  GPL v3
+ * @version  GIT: v0.x.jjjj-mm-dd
+ * @link     https://github.com/devmount/pluginDraft
+ * @link     http://devmount.de/Develop/Mozilo%20Plugins/PluginDraft.html
+ * @see      Verse
+ *            - The Bible
  *
  * Plugin created by DEVMOUNT
  * www.devmount.de
@@ -20,21 +27,30 @@ if (!defined('IS_CMS')) {
     die();
 }
 
-class pluginDraft extends Plugin
+/**
+ * PluginDraft Class
+ *
+ * @category PHP
+ * @package  PHP_MoziloPlugins
+ * @author   HPdesigner <kontakt@devmount.de>
+ * @license  GPL v3
+ * @link     https://github.com/devmount/pluginDraft
+ */
+class PluginDraft extends Plugin
 {
     // language
-    private $admin_lang;
-    private $cms_lang;
+    private $_admin_lang;
+    private $_cms_lang;
 
     // plugin information
     const PLUGIN_AUTHOR  = 'HPdesigner';
-    const PLUGIN_DOCU    = 
-        'http://www.devmount.de/Develop/Mozilo%20Plugins/pluginDraft.html';
-    const PLUGIN_TITLE   = 'pluginDraft';
+    const PLUGIN_DOCU
+        = 'http://devmount.de/Develop/Mozilo%20Plugins/PluginDraft.html';
+    const PLUGIN_TITLE   = 'PluginDraft';
     const PLUGIN_VERSION = 'v0.x.jjjj-mm-dd';
     const MOZILO_VERSION = '2.0';
-    private $plugin_tags = array(
-        'tag1' => '{pluginDraft|type|<param1>|<param2>}',
+    private $_plugin_tags = array(
+        'tag1' => '{PluginDraft|type|<param1>|<param2>}',
     );
 
     
@@ -50,18 +66,51 @@ class pluginDraft extends Plugin
      *      radio    => default, type, descriptions
      *      select   => default, type, descriptions, multiselect
      */
-    private $confdefault = array(
-        'text'     => array('string','text','100','5',"/^[0-9]{1,3}$/"),
-        'textarea' => array('string','textarea','10','10',"/^[a-zA-Z0-9]{1,10}$/"),
-        'password' => array('string','password','100','5',"/^[a-zA-Z0-9]{8,20}$/",true),
-        'check'    => array(true,'check'),
-        'radio'    => array('red','radio',array('red','green','blue')),
-        'select'   => array('bike','select',array('car','bike','plane'),false),
+    private $_confdefault = array(
+        'text' => array(
+            'string',
+            'text',
+            '100',
+            '5',
+            "/^[0-9]{1,3}$/",
+        ),
+        'textarea' => array(
+            'string',
+            'textarea',
+            '10',
+            '10',
+            "/^[a-zA-Z0-9]{1,10}$/",
+        ),
+        'password' => array(
+            'string',
+            'password',
+            '100',
+            '5',
+            "/^[a-zA-Z0-9]{8,20}$/",
+            true,
+        ),
+        'check' => array(
+            true,
+            'check',
+        ),
+        'radio' => array(
+            'red',
+            'radio',
+            array('red', 'green', 'blue'),
+        ),
+        'select' => array(
+            'bike',
+            'select',
+            array('car','bike','plane'),
+            false,
+        ),
     );
 
     /**
      * creates plugin content
+     * 
      * @param string $value Parameter divided by '|'
+     * 
      * @return string HTML output
      */
     function getContent($value)
@@ -69,22 +118,23 @@ class pluginDraft extends Plugin
         global $CMS_CONF;
         global $syntax;
 
-        $this->cms_lang = new Language(
+        $this->_cms_lang = new Language(
             $this->PLUGIN_SELF_DIR
-            . 'lang/cms_language_'
+            . 'lang/_cms_language_'
             . $CMS_CONF->get('cmslanguage')
             . '.txt'
         );
 
         // get language labels
-        $label = $this->cms_lang->getLanguageValue('label');
+        $label = $this->_cms_lang->getLanguageValue('label');
 
         // get params
-        list($param_,$param_,$param_) = $this->makeUserParaArray($value,false,"|");
+        list($param_, $param_, $param_)
+            = $this->makeUserParaArray($value, false, "|");
 
         // get conf and set default
         $conf = array();
-        foreach ($this->confdefault as $elem => $default) {
+        foreach ($this->_confdefault as $elem => $default) {
             $conf[$elem] = array(
                 ($this->settings->get($elem) == '')
                     ? $default[0]
@@ -93,12 +143,12 @@ class pluginDraft extends Plugin
             );
         }
 
-        // include jquery and pluginDraft javascript
+        // include jquery and PluginDraft javascript
         $syntax->insert_jquery_in_head('jquery');
         $syntax->insert_in_head(
             '<script type="text/javascript" src="'
             . $this->PLUGIN_SELF_URL
-            . 'js/pluginDraft.js"></script>'
+            . 'js/PluginDraft.js"></script>'
         );
 
         // initialize return content, begin plugin content
@@ -114,87 +164,89 @@ class pluginDraft extends Plugin
 
     /**
      * sets backend configuration elements and template
+     * 
      * @return Array configuration
      */
     function getConfig()
     {
         $config = array();
 
-        // read config values
-        foreach ($this->confdefault as $key => $value) {
+        // read configuration values
+        foreach ($this->_confdefault as $key => $value) {
+            // handle each form type
             switch ($value[1]) {
-                case 'text':
-                    $config[$key] = $this->confText(
-                        $this->admin_lang->getLanguageValue('config_' . $key),
-                        $value[2],
-                        $value[3],
-                        $value[4],
-                        $this->admin_lang->getLanguageValue(
-                            'config_' . $key . '_error'
-                        )
-                    );
-                    break;
+            case 'text':
+                $config[$key] = $this->confText(
+                    $this->_admin_lang->getLanguageValue('config_' . $key),
+                    $value[2],
+                    $value[3],
+                    $value[4],
+                    $this->_admin_lang->getLanguageValue(
+                        'config_' . $key . '_error'
+                    )
+                );
+                break;
 
-                case 'textarea':
-                    $config[$key] = $this->confTextarea(
-                        $this->admin_lang->getLanguageValue('config_' . $key),
-                        $value[2],
-                        $value[3],
-                        $value[4],
-                        $this->admin_lang->getLanguageValue(
-                            'config_' . $key . '_error'
-                        )
-                    );
-                    break;
+            case 'textarea':
+                $config[$key] = $this->confTextarea(
+                    $this->_admin_lang->getLanguageValue('config_' . $key),
+                    $value[2],
+                    $value[3],
+                    $value[4],
+                    $this->_admin_lang->getLanguageValue(
+                        'config_' . $key . '_error'
+                    )
+                );
+                break;
 
-                case 'password':
-                    $config[$key] = $this->confPassword(
-                        $this->admin_lang->getLanguageValue('config_' . $key),
-                        $value[2],
-                        $value[3],
-                        $value[4],
-                        $this->admin_lang->getLanguageValue(
-                            'config_' . $key . '_error'
-                        ),
-                        $value[5]
-                    );
-                    break;
+            case 'password':
+                $config[$key] = $this->confPassword(
+                    $this->_admin_lang->getLanguageValue('config_' . $key),
+                    $value[2],
+                    $value[3],
+                    $value[4],
+                    $this->_admin_lang->getLanguageValue(
+                        'config_' . $key . '_error'
+                    ),
+                    $value[5]
+                );
+                break;
 
-                case 'check':
-                    $config[$key] = $this->confCheck(
-                        $this->admin_lang->getLanguageValue('config_' . $key)
-                    );
-                    break;
+            case 'check':
+                $config[$key] = $this->confCheck(
+                    $this->_admin_lang->getLanguageValue('config_' . $key)
+                );
+                break;
 
-                case 'radio':
-                    $descriptions = array();
-                    foreach ($value[2] as $label) {
-                        $descriptions[$label] = $this->admin_lang->getLanguageValue(
-                            'config_' . $key . '_' . $label
-                        );
-                    }
-                    $config[$key] = $this->confRadio(
-                        $this->admin_lang->getLanguageValue('config_' . $key),
-                        $descriptions
+            case 'radio':
+                $descriptions = array();
+                foreach ($value[2] as $label) {
+                    $descriptions[$label] = $this->_admin_lang->getLanguageValue(
+                        'config_' . $key . '_' . $label
                     );
-                    break;
+                }
+                $config[$key] = $this->confRadio(
+                    $this->_admin_lang->getLanguageValue('config_' . $key),
+                    $descriptions
+                );
+                break;
 
-                case 'select':
-                    $descriptions = array();
-                    foreach ($value[2] as $label) {
-                        $descriptions[$label] = $this->admin_lang->getLanguageValue(
-                            'config_' . $key . '_' . $label
-                        );
-                    }
-                    $config[$key] = $this->confSelect(
-                        $this->admin_lang->getLanguageValue('config_' . $key),
-                        $descriptions,
-                        $value[3]
+            case 'select':
+                $descriptions = array();
+                foreach ($value[2] as $label) {
+                    $descriptions[$label] = $this->_admin_lang->getLanguageValue(
+                        'config_' . $key . '_' . $label
                     );
-                    break;
+                }
+                $config[$key] = $this->confSelect(
+                    $this->_admin_lang->getLanguageValue('config_' . $key),
+                    $descriptions,
+                    $value[3]
+                );
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
         }
 
@@ -223,14 +275,15 @@ class pluginDraft extends Plugin
             background: #eee;
         ';
         $css_admin_default = '
-            color: #aaa;padding-left: 6px;
+            color: #aaa;
+            padding-left: 6px;
         ';
 
         // build Template
         // $config['--template~~'] = '
         //     <div style="' . $css_admin_header . '">
         //     <span style="' . $css_admin_header_span . '">'
-        //         . $this->admin_lang->getLanguageValue(
+        //         . $this->_admin_lang->getLanguageValue(
         //              'admin_header',
         //              self::PLUGIN_TITLE
         //         )
@@ -243,19 +296,19 @@ class pluginDraft extends Plugin
         // </li>
         // <li class="mo-in-ul-li ui-widget-content" style="' . $css_admin_li . '">
         //     <div style="' . $css_admin_subheader . '">'
-        //     . $this->admin_lang->getLanguageValue('admin_spacing') . '</div>
+        //     . $this->_admin_lang->getLanguageValue('admin_spacing') . '</div>
         //     <div style="margin-bottom:5px;">
         //         {test1_text}
         //         {test1_description}
         //         <span style="' . $css_admin_default .'">
-        //             [' . $this->confdefault['test1'][0] .']
+        //             [' . $this->_confdefault['test1'][0] .']
         //         </span>
         //     </div>
         //     <div style="margin-bottom:5px;">
         //         {test2_text}
         //         {test2_description}
         //         <span style="' . $css_admin_default .'">
-        //             [' . $this->confdefault['test2'][0] .']
+        //             [' . $this->_confdefault['test2'][0] .']
         //         </span>
         // ';
 
@@ -271,7 +324,7 @@ class pluginDraft extends Plugin
     function getDefaultSettings()
     {
         $config = array('active' => 'true');
-        foreach ($this->confdefault as $elem => $default) {
+        foreach ($this->_confdefault as $elem => $default) {
             $config[$elem] = $default[0];
         }
         return $config;
@@ -279,29 +332,30 @@ class pluginDraft extends Plugin
 
     /**
      * sets backend plugin information
+     * 
      * @return Array information
      */
     function getInfo()
     {
 
         global $ADMIN_CONF;
-        $this->admin_lang = new Language(
+        $this->_admin_lang = new Language(
             $this->PLUGIN_SELF_DIR
-            . 'lang/admin_language_'
+            . 'lang/_admin_language_'
             . $ADMIN_CONF->get('language')
             . '.txt'
         );
 
         // build plugin tags
         $tags = array();
-        foreach ($this->plugin_tags as $key => $tag) {
-            $tags[$tag] = $this->admin_lang->getLanguageValue('tag_' . $key);
+        foreach ($this->_plugin_tags as $key => $tag) {
+            $tags[$tag] = $this->_admin_lang->getLanguageValue('tag_' . $key);
         }
 
         $info = array(
             '<b>' . self::PLUGIN_TITLE . '</b> ' . self::PLUGIN_VERSION,
             self::MOZILO_VERSION,
-            $this->admin_lang->getLanguageValue('description'), 
+            $this->_admin_lang->getLanguageValue('description'), 
             self::PLUGIN_AUTHOR,
             self::PLUGIN_DOCU,
             $tags
@@ -312,11 +366,13 @@ class pluginDraft extends Plugin
 
     /**
      * creates configuration for text fields
-     * @param  string $description Label
-     * @param  string $maxlength Maximum number of characters
-     * @param  string $size Size
-     * @param  string $regex Regular expression for allowed input
-     * @param  string $regex_error Wrong input error message
+     * 
+     * @param string $description Label
+     * @param string $maxlength   Maximum number of characters
+     * @param string $size        Size
+     * @param string $regex       Regular expression for allowed input
+     * @param string $regex_error Wrong input error message
+     * 
      * @return Array  Configuration
      */
     protected function confText(
@@ -332,20 +388,30 @@ class pluginDraft extends Plugin
             'description' => $description,
         );
         // optional properties
-        if ($maxlength != '') $conftext['maxlength'] = $maxlength;
-        if ($size != '') $conftext['size'] = $size;
-        if ($regex != '') $conftext['regex'] = $regex;
-        if ($regex_error != '') $conftext['regex_error'] = $regex_error;
+        if ($maxlength != '') {
+            $conftext['maxlength'] = $maxlength;
+        }
+        if ($size != '') {
+            $conftext['size'] = $size;
+        }
+        if ($regex != '') {
+            $conftext['regex'] = $regex;
+        }
+        if ($regex_error != '') {
+            $conftext['regex_error'] = $regex_error;
+        }
         return $conftext;
     }
 
     /**
      * creates configuration for textareas
-     * @param  string $description Label
-     * @param  string $cols Number of columns
-     * @param  string $rows Number of rows
-     * @param  string $regex Regular expression for allowed input
-     * @param  string $regex_error Wrong input error message
+     * 
+     * @param string $description Label
+     * @param string $cols        Number of columns
+     * @param string $rows        Number of rows
+     * @param string $regex       Regular expression for allowed input
+     * @param string $regex_error Wrong input error message
+     * 
      * @return Array  Configuration
      */
     protected function confTextarea(
@@ -361,21 +427,31 @@ class pluginDraft extends Plugin
             'description' => $description,
         );
         // optional properties
-        if ($cols != '') $conftext['cols'] = $cols;
-        if ($rows != '') $conftext['rows'] = $rows;
-        if ($regex != '') $conftext['regex'] = $regex;
-        if ($regex_error != '') $conftext['regex_error'] = $regex_error;
+        if ($cols != '') {
+            $conftext['cols'] = $cols;
+        }
+        if ($rows != '') {
+            $conftext['rows'] = $rows;
+        }
+        if ($regex != '') {
+            $conftext['regex'] = $regex;
+        }
+        if ($regex_error != '') {
+            $conftext['regex_error'] = $regex_error;
+        }
         return $conftext;
     }
 
     /**
      * creates configuration for password fields
-     * @param  string  $description Label
-     * @param  string  $maxlength Maximum number of characters
-     * @param  string  $size Size
-     * @param  string  $regex Regular expression for allowed input
-     * @param  string  $regex_error Wrong input error message
-     * @param  boolean $saveasmd5 Safe password as md5 (recommended!)
+     * 
+     * @param string  $description Label
+     * @param string  $maxlength   Maximum number of characters
+     * @param string  $size        Size
+     * @param string  $regex       Regular expression for allowed input
+     * @param string  $regex_error Wrong input error message
+     * @param boolean $saveasmd5   Safe password as md5 (recommended!)
+     * 
      * @return Array   Configuration
      */
     protected function confPassword(
@@ -392,16 +468,24 @@ class pluginDraft extends Plugin
             'description' => $description,
         );
         // optional properties
-        if ($maxlength != '') $conftext['maxlength'] = $maxlength;
-        if ($size != '') $conftext['size'] = $size;
-        if ($regex != '') $conftext['regex'] = $regex;
+        if ($maxlength != '') {
+            $conftext['maxlength'] = $maxlength;
+        }
+        if ($size != '') {
+            $conftext['size'] = $size;
+        }
+        if ($regex != '') {
+            $conftext['regex'] = $regex;
+        }
         $conftext['saveasmd5'] = $saveasmd5;
         return $conftext;
     }
 
     /**
      * creates configuration for checkboxes
-     * @param  string $description Label
+     * 
+     * @param string $description Label
+     * 
      * @return Array  Configuration
      */
     protected function confCheck($description)
@@ -415,8 +499,10 @@ class pluginDraft extends Plugin
 
     /**
      * creates configuration for radio buttons
-     * @param string $description Label
+     * 
+     * @param string $description  Label
      * @param string $descriptions Array Single item labels
+     * 
      * @return Array Configuration
      */
     protected function confRadio($description, $descriptions)
@@ -426,14 +512,16 @@ class pluginDraft extends Plugin
             'type' => 'select',
             'description' => $description,
             'descriptions' => $descriptions,
-        );
+        ); 
     }
 
     /**
      * creates configuration for select fields
-     * @param  string  $description Label
-     * @param  string  $descriptions Array Single item labels
-     * @param  boolean $multiple Enable multiple item selection
+     * 
+     * @param string  $description  Label
+     * @param string  $descriptions Array Single item labels
+     * @param boolean $multiple     Enable multiple item selection
+     * 
      * @return Array   Configuration
      */
     protected function confSelect($description, $descriptions, $multiple = false)
@@ -449,15 +537,17 @@ class pluginDraft extends Plugin
 
     /**
      * throws styled error message
-     * @param  string $text Content of error message
+     * 
+     * @param string $text Content of error message
+     * 
      * @return string HTML content
      */
     protected function throwError($text)
     {
         return '<div class="' . self::PLUGIN_TITLE . 'Error">'
-                . '<div>' . $this->cms_lang->getLanguageValue('error') . '</div>'
-                . '<span>' . $text. '</span>'
-                . '</div>';
+            . '<div>' . $this->_cms_lang->getLanguageValue('error') . '</div>'
+            . '<span>' . $text. '</span>'
+            . '</div>';
     }
 
 }
