@@ -120,7 +120,7 @@ class PluginDraft extends Plugin
 
         $this->_cms_lang = new Language(
             $this->PLUGIN_SELF_DIR
-            . 'lang/_cms_language_'
+            . 'lang/cms_language_'
             . $CMS_CONF->get('cmslanguage')
             . '.txt'
         );
@@ -341,7 +341,7 @@ class PluginDraft extends Plugin
         global $ADMIN_CONF;
         $this->_admin_lang = new Language(
             $this->PLUGIN_SELF_DIR
-            . 'lang/_admin_language_'
+            . 'lang/admin_language_'
             . $ADMIN_CONF->get('language')
             . '.txt'
         );
