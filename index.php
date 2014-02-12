@@ -53,12 +53,13 @@ class PluginDraft extends Plugin
         'tag1' => '{PluginDraft|type|<param1>|<param2>}',
     );
 
+    const LOGO_URL = 'http://media.devmount.de/logo_pluginconf.png';
     
     /**
      * set configuration elements, their default values and their configuration
      * parameters
      * 
-     * @var array
+     * @var array $_confdefault
      *      text     => default, type, maxlength, size, regex
      *      textarea => default, type, cols, rows, regex
      *      password => default, type, maxlength, size, regex, saveasmd5
@@ -289,8 +290,7 @@ class PluginDraft extends Plugin
         //         )
         //     . '</span>
         //     <a href="' . self::PLUGIN_DOCU . '" target="_blank">
-        //     <img style="float:right;" 
-        //     src="http://media.devmount.de/logo_pluginconf.png" />
+        //     <img style="float:right;" src="' . self::LOGO_URL . '" />
         //     </a>
         //     </div>
         // </li>
@@ -337,7 +337,6 @@ class PluginDraft extends Plugin
      */
     function getInfo()
     {
-
         global $ADMIN_CONF;
         $this->_admin_lang = new Language(
             $this->PLUGIN_SELF_DIR
