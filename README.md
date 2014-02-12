@@ -1,7 +1,7 @@
-pluginDraft
+PluginDraft
 ===========
 
 A plugin draft for easier moziloCMS plugin development.
 
-You can finde the documentation on devmount's website:
-http://devmount.de/Develop/Mozilo%20Plugins/pluginDraft.html
+You can find the documentation on devmount's website:
+http://devmount.de/Develop/Mozilo%20Plugins/PluginDraft.html

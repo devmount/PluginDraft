@@ -131,7 +131,7 @@ class PluginDraft extends Plugin
 
         // get params
         list($param_, $param_, $param_)
-            = $this->makeUserParaArray($value, false, "|");
+            = $this->makeUserParaArray($value, false, '|');
 
         // get conf and set default
         $conf = array();
