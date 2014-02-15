@@ -54,11 +54,11 @@ class PluginDraft extends Plugin
     );
 
     const LOGO_URL = 'http://media.devmount.de/logo_pluginconf.png';
-    
+
     /**
      * set configuration elements, their default values and their configuration
      * parameters
-     * 
+     *
      * @var array $_confdefault
      *      text     => default, type, maxlength, size, regex
      *      textarea => default, type, cols, rows, regex
@@ -109,9 +109,9 @@ class PluginDraft extends Plugin
 
     /**
      * creates plugin content
-     * 
+     *
      * @param string $value Parameter divided by '|'
-     * 
+     *
      * @return string HTML output
      */
     function getContent($value)
@@ -154,7 +154,7 @@ class PluginDraft extends Plugin
 
         // initialize return content, begin plugin content
         $content = '<!-- BEGIN ' . self::PLUGIN_TITLE . ' plugin content --> ';
-        
+
         // do something awesome here! ...
 
         // end plugin content
@@ -165,7 +165,7 @@ class PluginDraft extends Plugin
 
     /**
      * sets backend configuration elements and template
-     * 
+     *
      * @return Array configuration
      */
     function getConfig()
@@ -316,9 +316,9 @@ class PluginDraft extends Plugin
     }
 
     /**
-     * sets default backend configuration elements, if no plugin.conf.php is 
+     * sets default backend configuration elements, if no plugin.conf.php is
      * created yet
-     * 
+     *
      * @return Array configuration
      */
     function getDefaultSettings()
@@ -332,7 +332,7 @@ class PluginDraft extends Plugin
 
     /**
      * sets backend plugin information
-     * 
+     *
      * @return Array information
      */
     function getInfo()
@@ -354,7 +354,10 @@ class PluginDraft extends Plugin
         $info = array(
             '<b>' . self::PLUGIN_TITLE . '</b> ' . self::PLUGIN_VERSION,
             self::MOZILO_VERSION,
-            $this->_admin_lang->getLanguageValue('description'), 
+            $this->_admin_lang->getLanguageValue(
+                'description',
+                htmlspecialchars($this->_plugin_tags['tag1'])
+            ),
             self::PLUGIN_AUTHOR,
             self::PLUGIN_DOCU,
             $tags
@@ -365,13 +368,13 @@ class PluginDraft extends Plugin
 
     /**
      * creates configuration for text fields
-     * 
+     *
      * @param string $description Label
      * @param string $maxlength   Maximum number of characters
      * @param string $size        Size
      * @param string $regex       Regular expression for allowed input
      * @param string $regex_error Wrong input error message
-     * 
+     *
      * @return Array  Configuration
      */
     protected function confText(
@@ -404,13 +407,13 @@ class PluginDraft extends Plugin
 
     /**
      * creates configuration for textareas
-     * 
+     *
      * @param string $description Label
      * @param string $cols        Number of columns
      * @param string $rows        Number of rows
      * @param string $regex       Regular expression for allowed input
      * @param string $regex_error Wrong input error message
-     * 
+     *
      * @return Array  Configuration
      */
     protected function confTextarea(
@@ -443,14 +446,14 @@ class PluginDraft extends Plugin
 
     /**
      * creates configuration for password fields
-     * 
+     *
      * @param string  $description Label
      * @param string  $maxlength   Maximum number of characters
      * @param string  $size        Size
      * @param string  $regex       Regular expression for allowed input
      * @param string  $regex_error Wrong input error message
      * @param boolean $saveasmd5   Safe password as md5 (recommended!)
-     * 
+     *
      * @return Array   Configuration
      */
     protected function confPassword(
@@ -482,9 +485,9 @@ class PluginDraft extends Plugin
 
     /**
      * creates configuration for checkboxes
-     * 
+     *
      * @param string $description Label
-     * 
+     *
      * @return Array  Configuration
      */
     protected function confCheck($description)
@@ -498,10 +501,10 @@ class PluginDraft extends Plugin
 
     /**
      * creates configuration for radio buttons
-     * 
+     *
      * @param string $description  Label
      * @param string $descriptions Array Single item labels
-     * 
+     *
      * @return Array Configuration
      */
     protected function confRadio($description, $descriptions)
@@ -511,16 +514,16 @@ class PluginDraft extends Plugin
             'type' => 'select',
             'description' => $description,
             'descriptions' => $descriptions,
-        ); 
+        );
     }
 
     /**
      * creates configuration for select fields
-     * 
+     *
      * @param string  $description  Label
      * @param string  $descriptions Array Single item labels
      * @param boolean $multiple     Enable multiple item selection
-     * 
+     *
      * @return Array   Configuration
      */
     protected function confSelect($description, $descriptions, $multiple = false)
@@ -536,9 +539,9 @@ class PluginDraft extends Plugin
 
     /**
      * throws styled error message
-     * 
+     *
      * @param string $text Content of error message
-     * 
+     *
      * @return string HTML content
      */
     protected function throwError($text)
