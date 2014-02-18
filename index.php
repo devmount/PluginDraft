@@ -12,7 +12,7 @@
  * @author   HPdesigner <kontakt@devmount.de>
  * @license  GPL v3
  * @version  GIT: v0.x.jjjj-mm-dd
- * @link     https://github.com/devmount/pluginDraft
+ * @link     https://github.com/devmount/PluginDraft
  * @link     http://devmount.de/Develop/Mozilo%20Plugins/PluginDraft.html
  * @see      Verse
  *            - The Bible
@@ -252,41 +252,46 @@ class PluginDraft extends Plugin
         }
 
         // Template CSS
-        $css_admin_header = '
-            margin: -0.4em -0.8em -5px -0.8em;
-            padding: 10px;
-            background-color: #234567;
-            color: #fff;
-            text-shadow: #000 0 1px 3px;
-        ';
-        $css_admin_header_span = '
-            font-size:20px;
-            vertical-align: top;
-            padding-top: 3px;
-            display: inline-block;
-        ';
-        $css_admin_subheader = '
-            margin: -0.4em -0.8em 5px -0.8em;
-            padding: 5px 9px;
-            background-color: #ddd;
-            color: #111;
-            text-shadow: #fff 0 1px 2px;
-        ';
-        $css_admin_li = '
-            background: #eee;
-        ';
-        $css_admin_default = '
-            color: #aaa;
-            padding-left: 6px;
+        $template = '
+            <style>
+            .admin-header {
+                margin: -0.4em -0.8em -5px -0.8em;
+                padding: 10px;
+                background-color: #234567;
+                color: #fff;
+                text-shadow: #000 0 1px 3px;
+            }
+            .admin-header span {
+                font-size:20px;
+                vertical-align: top;
+                padding-top: 3px;
+                display: inline-block;
+            }
+            .admin-subheader {
+                margin: -0.4em -0.8em 5px -0.8em;
+                padding: 5px 9px;
+                background-color: #ddd;
+                color: #111;
+                text-shadow: #fff 0 1px 2px;
+            }
+            .admin-li {
+                background: #eee;
+            }
+            .admin-default {
+                color: #aaa;
+                padding-left: 6px;
+            }
+            </style>
         ';
 
+
         // build Template
-        // $config['--template~~'] = '
-        //     <div style="' . $css_admin_header . '">
-        //     <span style="' . $css_admin_header_span . '">'
+        // $template .= '
+        //     <div class="admin-header">
+        //     <span>'
         //         . $this->_admin_lang->getLanguageValue(
-        //              'admin_header',
-        //              self::PLUGIN_TITLE
+        //             'admin_header',
+        //             self::PLUGIN_TITLE
         //         )
         //     . '</span>
         //     <a href="' . self::PLUGIN_DOCU . '" target="_blank">
@@ -294,20 +299,21 @@ class PluginDraft extends Plugin
         //     </a>
         //     </div>
         // </li>
-        // <li class="mo-in-ul-li ui-widget-content" style="' . $css_admin_li . '">
-        //     <div style="' . $css_admin_subheader . '">'
-        //     . $this->_admin_lang->getLanguageValue('admin_spacing') . '</div>
+        // <li class="mo-in-ul-li ui-widget-content admin-li">
+        //     <div class="admin-subheader">'
+        //     . $this->_admin_lang->getLanguageValue('admin_test')
+        //     . '</div>
         //     <div style="margin-bottom:5px;">
         //         {test1_text}
         //         {test1_description}
-        //         <span style="' . $css_admin_default .'">
+        //         <span class="admin-default">
         //             [' . $this->_confdefault['test1'][0] .']
         //         </span>
         //     </div>
         //     <div style="margin-bottom:5px;">
         //         {test2_text}
         //         {test2_description}
-        //         <span style="' . $css_admin_default .'">
+        //         <span class="admin-default">
         //             [' . $this->_confdefault['test2'][0] .']
         //         </span>
         // ';
