@@ -17,5 +17,14 @@ Installing a plugin manually requires FTP Access.
 
 ## Syntax
 ```{PluginDraft|<param1>|<param2>}```
+Here comes the general description of the plugin tag.
 
-A detailed documentation can be found on DEVMOUNT's website:http://devmount.de/Develop/Mozilo%20Plugins/PluginDraft.html
+1. Parameter ```<param1>```: Short description of parameter 1.
+2. Parameter ```<param2>```: Short description of parameter 2.
+
+## License
+This Plugin is distributed under *GNU General Public License, Version 3* (see LICENSE).
+
+## Documentation
+A detailed documentation and demo can be found on DEVMOUNT's website:
+http://devmount.de/Develop/Mozilo%20Plugins/PluginDraft.html
