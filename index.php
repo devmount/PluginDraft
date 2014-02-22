@@ -136,12 +136,9 @@ class PluginDraft extends Plugin
         // get conf and set default
         $conf = array();
         foreach ($this->_confdefault as $elem => $default) {
-            $conf[$elem] = array(
-                ($this->settings->get($elem) == '')
-                    ? $default[0]
-                    : $this->settings->get($elem),
-                $default[1],
-            );
+            $conf[$elem] = ($this->settings->get($elem) == '')
+                ? $default[0]
+                : $this->settings->get($elem);
         }
 
         // include jquery and PluginDraft javascript
@@ -317,6 +314,8 @@ class PluginDraft extends Plugin
         //             [' . $this->_confdefault['test2'][0] .']
         //         </span>
         // ';
+        //
+        // $config['--template~~'] = $template;
 
         return $config;
     }
@@ -554,6 +553,21 @@ class PluginDraft extends Plugin
     {
         return '<div class="' . self::PLUGIN_TITLE . 'Error">'
             . '<div>' . $this->_cms_lang->getLanguageValue('error') . '</div>'
+            . '<span>' . $text. '</span>'
+            . '</div>';
+    }
+
+    /**
+     * throws styled success message
+     *
+     * @param string $text Content of success message
+     *
+     * @return string HTML content
+     */
+    protected function throwSuccess($text)
+    {
+        return '<div class="' . self::PLUGIN_TITLE . 'Success">'
+            . '<div>' . $this->_cms_lang->getLanguageValue('success') . '</div>'
             . '<span>' . $text. '</span>'
             . '</div>';
     }
