@@ -248,74 +248,50 @@ class PluginDraft extends Plugin
             }
         }
 
-        // Template CSS
-        $template = '
-            <style>
-            .admin-header {
-                margin: -0.4em -0.8em -5px -0.8em;
-                padding: 10px;
-                background-color: #234567;
-                color: #fff;
-                text-shadow: #000 0 1px 3px;
-            }
-            .admin-header span {
-                font-size:20px;
-                vertical-align: top;
-                padding-top: 3px;
-                display: inline-block;
-            }
-            .admin-subheader {
-                margin: -0.4em -0.8em 5px -0.8em;
-                padding: 5px 9px;
-                background-color: #ddd;
-                color: #111;
-                text-shadow: #fff 0 1px 2px;
-            }
-            .admin-li {
-                background: #eee;
-            }
-            .admin-default {
-                color: #aaa;
-                padding-left: 6px;
-            }
-            </style>
-        ';
+        // read admin.css
+        $admin_css = '';
+        $lines = file('../plugins/' . self::PLUGIN_TITLE. '/admin.css');
+        foreach ($lines as $line_num => $line) {
+            $admin_css .= trim($line);
+        }
 
+        // add template CSS
+        $template = '<style>' . $admin_css . '</style>';
 
         // build Template
-        // $template .= '
-        //     <div class="admin-header">
-        //     <span>'
-        //         . $this->_admin_lang->getLanguageValue(
-        //             'admin_header',
-        //             self::PLUGIN_TITLE
-        //         )
-        //     . '</span>
-        //     <a href="' . self::PLUGIN_DOCU . '" target="_blank">
-        //     <img style="float:right;" src="' . self::LOGO_URL . '" />
-        //     </a>
-        //     </div>
-        // </li>
-        // <li class="mo-in-ul-li ui-widget-content admin-li">
-        //     <div class="admin-subheader">'
-        //     . $this->_admin_lang->getLanguageValue('admin_test')
-        //     . '</div>
-        //     <div style="margin-bottom:5px;">
-        //         {test1_text}
-        //         {test1_description}
-        //         <span class="admin-default">
-        //             [' . $this->_confdefault['test1'][0] .']
-        //         </span>
-        //     </div>
-        //     <div style="margin-bottom:5px;">
-        //         {test2_text}
-        //         {test2_description}
-        //         <span class="admin-default">
-        //             [' . $this->_confdefault['test2'][0] .']
-        //         </span>
-        // ';
-        //
-        // $config['--template~~'] = $template;
+        $template .= '
+            <div class="plugindraft-admin-header">
+            <span>'
+                . $this->_admin_lang->getLanguageValue(
+                    'admin_header',
+                    self::PLUGIN_TITLE
+                )
+            . '</span>
+            <a href="' . self::PLUGIN_DOCU . '" target="_blank">
+            <img style="float:right;" src="' . self::LOGO_URL . '" />
+            </a>
+            </div>
+        </li>
+        <li class="mo-in-ul-li ui-widget-content plugindraft-admin-li">
+            <div class="plugindraft-admin-subheader">'
+            . $this->_admin_lang->getLanguageValue('admin_test')
+            . '</div>
+            <div style="margin-bottom:5px;">
+                {test1_text}
+                {test1_description}
+                <span class="plugindraft-admin-default">
+                    [' . /*$this->_confdefault['test1'][0] .*/']
+                </span>
+            </div>
+            <div style="margin-bottom:5px;">
+                {test2_text}
+                {test2_description}
+                <span class="plugindraft-admin-default">
+                    [' . /*$this->_confdefault['test2'][0] .*/']
+                </span>
+        ';
+
+        $config['--template~~'] = $template;
 
         return $config;
     }
