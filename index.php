@@ -406,7 +406,7 @@ class PluginDraft extends Plugin
     ) {
         // required properties
         $conftext = array(
-            'type' => 'text',
+            'type' => 'textarea',
             'description' => $description,
         );
         // optional properties
