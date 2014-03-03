@@ -9,7 +9,7 @@
  *
  * @category PHP
  * @package  PHP_MoziloPlugins
- * @author   HPdesigner <kontakt@devmount.de>
+ * @author   HPdesigner <mail@devmount.de>
  * @license  GPL v3
  * @version  GIT: v0.x.jjjj-mm-dd
  * @link     https://github.com/devmount/PluginDraft
@@ -32,7 +32,7 @@ if (!defined('IS_CMS')) {
  *
  * @category PHP
  * @package  PHP_MoziloPlugins
- * @author   HPdesigner <kontakt@devmount.de>
+ * @author   HPdesigner <mail@devmount.de>
  * @license  GPL v3
  * @link     https://github.com/devmount/pluginDraft
  */
@@ -319,6 +319,7 @@ class PluginDraft extends Plugin
     function getInfo()
     {
         global $ADMIN_CONF;
+
         $this->_admin_lang = new Language(
             $this->PLUGIN_SELF_DIR
             . 'lang/admin_language_'
