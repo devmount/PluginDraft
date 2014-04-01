@@ -15,7 +15,7 @@
  * @link     https://github.com/devmount/PluginDraft
  * @link     http://devmount.de/Develop/Mozilo%20Plugins/PluginDraft.html
  * @see      Verse
- *            - The Bible
+ *           – The Bible
  *
  * Plugin created by DEVMOUNT
  * www.devmount.de
