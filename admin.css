@@ -30,3 +30,19 @@
     display: inline-block;
     margin-right: 5px;
 }
+
+.plugindraft-bold {
+    font-weight: bold;
+}
+.plugindraft-code {
+    font-family: monospace;
+    margin: 3px 3px;
+    background-color: #eee;
+    border: 1px dotted #aaa;
+}
+.plugindraft-italic {
+    font-style: italic;
+}
+.plugindraft-pre {
+    font-family: monospace;
+}
