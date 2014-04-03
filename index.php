@@ -277,14 +277,18 @@ class PluginDraft extends Plugin
             . $this->_admin_lang->getLanguageValue('admin_test')
             . '</div>
             <div style="margin-bottom:5px;">
-                {test1_text}
+                <div class="plugindraft-single-conf">
+                    {test1_text}
+                </div>
                 {test1_description}
                 <span class="plugindraft-admin-default">
                     [' . /*$this->_confdefault['test1'][0] .*/']
                 </span>
             </div>
             <div style="margin-bottom:5px;">
-                {test2_text}
+                <div class="plugindraft-single-conf">
+                    {test2_text}
+                </div>
                 {test2_description}
                 <span class="plugindraft-admin-default">
                     [' . /*$this->_confdefault['test2'][0] .*/']
