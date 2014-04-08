@@ -2,23 +2,23 @@
     PluginDraft CSS styles
 */
 
-.PluginDraft {  
+.plugindraft {
 }
 
-.PluginDraftError {
+.plugindraft-error {
     display: table;
     margin: 2px 0;
     border: 1px solid #f33;
     background-color: #fee;
 }
-.PluginDraftError div {
+.plugindraft-error div {
     display: table-cell;
     padding: 2px 6px;
     color: white;
     background-color: #f33;
     height: inherit;
 }
-.PluginDraftError span {
+.plugindraft-error span {
     display: table-cell;
     padding: 2px 4px;
     color: #f33;
