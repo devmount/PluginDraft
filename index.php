@@ -45,7 +45,7 @@ class PluginDraft extends Plugin
     // plugin information
     const PLUGIN_AUTHOR  = 'HPdesigner';
     const PLUGIN_DOCU
-        = 'http://devmount.de/Develop/Mozilo%20Plugins/PluginDraft.html';
+        = 'http://devmount.de/Develop/moziloCMS/Plugins/PluginDraft.html';
     const PLUGIN_TITLE   = 'PluginDraft';
     const PLUGIN_VERSION = 'v0.x.jjjj-mm-dd';
     const MOZILO_VERSION = '2.0';
@@ -119,6 +119,7 @@ class PluginDraft extends Plugin
         global $CMS_CONF;
         global $syntax;
 
+        // initialize cms lang
         $this->_cms_lang = new Language(
             $this->PLUGIN_SELF_DIR
             . 'lang/cms_language_'
