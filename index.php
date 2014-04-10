@@ -534,8 +534,12 @@ class PluginDraft extends Plugin
      */
     protected function throwMessage($text, $type)
     {
-        return '<div class="' . self::PLUGIN_TITLE . ucfirst(strtolower($type)) . '">'
-            . '<div>' . $this->cms_lang->getLanguageValue(strtolower($type)) . '</div>'
+        return '<div class="'
+                . self::PLUGIN_TITLE . ucfirst(strtolower($type))
+            . '">'
+            . '<div>'
+                . $this->cms_lang->getLanguageValue(strtolower($type))
+            . '</div>'
             . '<span>' . $text. '</span>'
             . '</div>';
     }
