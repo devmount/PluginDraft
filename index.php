@@ -525,31 +525,17 @@ class PluginDraft extends Plugin
     }
 
     /**
-     * throws styled error message
+     * throws styled message
      *
-     * @param string $text Content of error message
-     *
-     * @return string HTML content
-     */
-    protected function throwError($text)
-    {
-        return '<div class="' . self::PLUGIN_TITLE . 'Error">'
-            . '<div>' . $this->_cms_lang->getLanguageValue('error') . '</div>'
-            . '<span>' . $text. '</span>'
-            . '</div>';
-    }
-
-    /**
-     * throws styled success message
-     *
-     * @param string $text Content of success message
+     * @param string $type Type of message ('ERROR', 'SUCCESS')
+     * @param string $text Content of message
      *
      * @return string HTML content
      */
-    protected function throwSuccess($text)
+    protected function throwMessage($text, $type)
     {
-        return '<div class="' . self::PLUGIN_TITLE . 'Success">'
-            . '<div>' . $this->_cms_lang->getLanguageValue('success') . '</div>'
+        return '<div class="' . self::PLUGIN_TITLE . ucfirst(strtolower($type)) . '">'
+            . '<div>' . $this->cms_lang->getLanguageValue(strtolower($type)) . '</div>'
             . '<span>' . $text. '</span>'
             . '</div>';
     }
