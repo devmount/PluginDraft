@@ -10,10 +10,10 @@
  * @category PHP
  * @package  PHP_MoziloPlugins
  * @author   HPdesigner <mail@devmount.de>
- * @license  GPL v3
+ * @license  GPL v3+
  * @version  GIT: v0.x.jjjj-mm-dd
  * @link     https://github.com/devmount/PluginDraft
- * @link     http://devmount.de/Develop/Mozilo%20Plugins/PluginDraft.html
+ * @link     http://devmount.de/Develop/moziloCMS/Plugins/PluginDraft.html
  * @see      Verse
  *           – The Bible
  *
@@ -33,7 +33,7 @@ if (!defined('IS_CMS')) {
  * @category PHP
  * @package  PHP_MoziloPlugins
  * @author   HPdesigner <mail@devmount.de>
- * @license  GPL v3
+ * @license  GPL v3+
  * @link     https://github.com/devmount/pluginDraft
  */
 class PluginDraft extends Plugin
