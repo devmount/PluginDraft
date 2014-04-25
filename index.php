@@ -34,7 +34,7 @@ if (!defined('IS_CMS')) {
  * @package  PHP_MoziloPlugins
  * @author   HPdesigner <mail@devmount.de>
  * @license  GPL v3+
- * @link     https://github.com/devmount/pluginDraft
+ * @link     https://github.com/devmount/PluginDraft
  */
 class PluginDraft extends Plugin
 {
@@ -277,19 +277,15 @@ class PluginDraft extends Plugin
             <div class="plugindraft-admin-subheader">'
             . $this->_admin_lang->getLanguageValue('admin_test')
             . '</div>
-            <div style="margin-bottom:5px;">
-                <div class="plugindraft-single-conf">
-                    {test1_text}
-                </div>
+            <div class="plugindraft-single-conf">
+                {test1_text}
                 {test1_description}
                 <span class="plugindraft-admin-default">
                     [' . /*$this->_confdefault['test1'][0] .*/']
                 </span>
             </div>
-            <div style="margin-bottom:5px;">
-                <div class="plugindraft-single-conf">
-                    {test2_text}
-                </div>
+            <div class="plugindraft-single-conf">
+                {test2_text}
                 {test2_description}
                 <span class="plugindraft-admin-default">
                     [' . /*$this->_confdefault['test2'][0] .*/']
