@@ -131,8 +131,9 @@ class PluginDraft extends Plugin
         $label = $this->_cms_lang->getLanguageValue('label');
 
         // get params
-        list($param_, $param_, $param_)
-            = $this->makeUserParaArray($value, false, '|');
+        list($param_1, $param_2) = explode('|', $value);
+        $param_1 = trim($param_1);
+        $param_2 = trim($param_2);
 
         // get conf and set default
         $conf = array();
