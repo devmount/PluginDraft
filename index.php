@@ -92,7 +92,7 @@ class PluginDraft extends Plugin
             true,
         ),
         'check' => array(
-            true,
+            'true',
             'check',
         ),
         'radio' => array(
