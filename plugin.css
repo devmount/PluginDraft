@@ -11,6 +11,7 @@
     margin: 2px 0;
     border: 1px solid #777;
     background-color: #eee;
+    font-size: 12px;
 }
 .plugindraft-notice div {
     display: table-cell;
@@ -31,6 +32,7 @@
     margin: 2px 0;
     border: 1px solid #2a0;
     background-color: #efe;
+    font-size: 12px;
 }
 .plugindraft-success div {
     display: table-cell;
@@ -51,6 +53,7 @@
     margin: 2px 0;
     border: 1px solid #f33;
     background-color: #fee;
+    font-size: 12px;
 }
 .plugindraft-error div {
     display: table-cell;
