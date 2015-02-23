@@ -132,9 +132,7 @@ class PluginDraft extends Plugin
         $label = $this->_cms_lang->getLanguageValue('label');
 
         // get params
-        list($param_1, $param_2) = explode('|', $value);
-        $param_1 = trim($param_1);
-        $param_2 = trim($param_2);
+        list($param_1, $param_2) = array_map(trim, explode('|', $value));
 
         // get conf and set default
         $conf = array();
@@ -341,7 +339,7 @@ class PluginDraft extends Plugin
             self::MOZILO_VERSION,
             $this->_admin_lang->getLanguageValue(
                 'description',
-                htmlspecialchars($this->_plugin_tags['tag1'])
+                htmlspecialchars($this->_plugin_tags['tag1'], ENT_COMPAT, 'UTF-8')
             ),
             self::PLUGIN_AUTHOR,
             array(
