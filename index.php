@@ -12,8 +12,7 @@
  * @author   DEVMOUNT <mail@devmount.de>
  * @license  GPL v3+
  * @version  GIT: v0.x.jjjj-mm-dd
- * @link     https://github.com/devmount-mozilo/PluginDraft
- * @link     http://devmount.de/Develop/moziloCMS/Plugins/PluginDraft.html
+ * @link     https://github.com/devmount-mozilo/PluginDraft/wiki/Dokumentation
  * @see      Verse
  *           – The Bible
  *
@@ -48,7 +47,7 @@ class PluginDraft extends Plugin
     const PLUGIN_VERSION = 'v0.x.jjjj-mm-dd';
     const MOZILO_VERSION = '2.0';
     const PLUGIN_DOCU
-        = 'http://devmount.de/Develop/moziloCMS/Plugins/PluginDraft.html';
+        = 'https://github.com/devmount-mozilo/PluginDraft/wiki/Dokumentation';
 
     private $_plugin_tags = array(
         'tag1' => '{PluginDraft|type|<param1>|<param2>}',
