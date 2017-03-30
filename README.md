@@ -1,6 +1,4 @@
-PluginDraft
-===========
-
+# PluginDraft
 A Plugin for moziloCMS 2.0
 
 This plugin draft can be used for easier moziloCMS plugin development.
@@ -26,5 +24,5 @@ Here comes the general description of the plugin tag.
 This Plugin is distributed under *GNU General Public License, Version 3* (see LICENSE) or - at your choice - any further version.
 
 ## Documentation
-A detailed documentation and demo can be found on DEVMOUNT's website:
-http://devmount.de/Develop/moziloCMS/Plugins/PluginDraft.html
+A detailed documentation and demo can be found here:  
+https://github.com/devmount-mozilo/PluginDraft/wiki/Dokumentation
